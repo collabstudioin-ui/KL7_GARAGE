@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — KL7 Garage</title>
+  <meta name="description" content="Browse KL7 Garage's Instagram gallery — real bikes, real culture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arimo', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      padding: 0 60px;
+    }
+
+    .nav-logo {
+      position: absolute;
+      left: 32px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 44px;
+      list-style: none;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .nav-links a {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: 0.07em;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.2s, opacity 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: #fff;
+      transition: width .3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-active a::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+
+    .nav-admin {
+      position: absolute;
+      right: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-admin a {
+      color: #fff;
+      transition: opacity .2s;
+    }
+
+    .nav-admin a:hover {
+      opacity: .7;
+    }
+
+    /* HERO */
+    .gallery-hero {
+      margin-top: 80px;
+      height: 400px;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=1440&q=80') center/cover no-repeat;
+      opacity: .25;
+    }
+
+    .gallery-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-hero-content span {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: #aaa;
+      border: 1px solid #444;
+      padding: 4px 14px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .gallery-hero-content h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .gallery-hero-content p {
+      font-size: 16px;
+      color: #bbb;
+    }
+
+    /* CURATOR FEED */
+    .curator-section {
+      padding: 80px 60px 100px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .curator-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .curator-section-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .curator-section-header a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+      padding-bottom: 2px;
+      transition: border-color .2s;
+    }
+
+    .curator-section-header a:hover {
+      border-color: #fff;
+    }
+
+    /* Curator embed goes here */
+    #curator-feed {
+      min-height: 500px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #000;
+      padding: 80px 60px 30px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      gap: 60px;
+    }
+
+    .footer-brand {
+      flex: 1;
+      max-width: 350px;
+    }
+
+    .footer-brand img {
+      height: 120px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .footer-brand h2 {
+      display: none;
+    }
+
+    .footer-brand p {
+      font-family: 'Arimo', sans-serif;
+      font-size: 15px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .1em;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      font-family: 'Arimo', sans-serif;
+      font-size: 15px;
+      color: #bbb;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      transition: color .2s;
+    }
+
+    .footer-social a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom p {
+      font-family: 'Arimo', sans-serif;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    @media(max-width:900px) {
+      .gallery-hero-content h1 {
+        font-size: 40px;
+      }
+
+      .curator-section {
+        padding: 60px 24px 80px;
+      }
+
+      .footer-main {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      nav {
+        height: 80px;
+        padding: 0 20px;
+      }
+
+      .nav-logo {
+        left: 20px;
+      }
+
+      .nav-logo img {
+        height: 44px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-admin {
+        display: none;
+      }
+
+      #hamburger {
+        display: flex !important;
+      }
+    }
+
+    @media(max-width:600px) {
+      nav {
+        height: 72px;
+      }
+
+      .gallery-hero {
+        height: 300px;
+      }
+
+      .gallery-hero-content h1 {
+        font-size: 32px;
+      }
+
+      .footer {
+        padding: 48px 16px 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="bikes.html">BIKES</a></li>
+      <li><a href="sell.html">SELL YOUR BIKE</a></li>
+      <li class="nav-active"><a href="gallery.html">GALLERY</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="index.html#contact-section">CONTACT US</a></li>
+    </ul>
+    <div class="nav-admin">
+      <a href="admin-login.html" title="Admin Login">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+    </div>
+    <button id="hamburger" aria-label="Open menu" onclick="toggleMobileNav()"
+      style="display:none;position:absolute;right:20px;background:none;border:none;cursor:pointer;padding:6px;z-index:1100;flex-direction:column;gap:5px;align-items:center;justify-content:center;">
+      <span
+        style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;"></span>
+      <span
+        style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;"></span>
+      <span
+        style="display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s;"></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div id="mobileDrawer"
+    style="display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.97);z-index:1050;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;pointer-events:none;transition:opacity 0.3s;">
+    <button onclick="toggleMobileNav()"
+      style="position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;line-height:1;">&#10005;</button>
+    <a href="index.html"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:80%;text-align:center;">HOME</a>
+    <a href="bikes.html"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:80%;text-align:center;">BIKES</a>
+    <a href="sell.html"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:80%;text-align:center;">SELL
+      YOUR BIKE</a>
+    <a href="gallery.html"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:80%;text-align:center;">GALLERY</a>
+    <a href="#"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:80%;text-align:center;">ABOUT</a>
+    <a href="index.html#contact-section"
+      style="font-family:'Arimo',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.1em;color:#fff;text-decoration:none;text-transform:uppercase;padding:14px 0;width:80%;text-align:center;">CONTACT
+      US</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="gallery-hero">
+    <div class="gallery-hero-content">
+      <span>INSTAGRAM FEED</span>
+      <h1>OUR GALLERY</h1>
+      <p>Real machines. Real culture. Follow us @k_l_7_garage</p>
+    </div>
+  </div>
+
+  <!-- CURATOR.IO FEED -->
+  <section class="curator-section">
+    <div class="curator-section-header">
+      <h2>Latest from Instagram</h2>
+      <a href="https://instagram.com/k_l_7_garage" target="_blank" rel="noopener">@k_l_7_garage &rarr;</a>
+    </div>
+    <!-- 
+      TO ACTIVATE: 
+      1. Go to https://curator.io and create a free account
+      2. Connect your Instagram account @k_l_7_garage
+      3. Get your embed code (it looks like the lines below)
+      4. Replace the placeholder script src with your actual Curator feed ID
+    -->
+    <div id="curator-feed">
+      <!-- Curator.io embed will be inserted here -->
+      <link rel="stylesheet" href="https://cdn.curator.io/published/YOUR-FEED-ID/css/curator.css" type="text/css" />
+      <div id="curator-feed-default-feed-layout">
+        <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
+      </div>
+      <script type="text/javascript" charset="UTF-8"
+        src="https://cdn.curator.io/published/YOUR-FEED-ID/js/curator.js"></script>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" />
+        <p>Your premium destination for pre-owned luxury motorcycles. We buy, sell, and trade.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="bikes.html">Bikes</a></li>
+            <li><a href="sell.html">Sell Your Bike</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="index.html#contact-section">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>SUPPORT</h4>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CONTACT</h4>
+          <ul>
+            <li><a href="tel:+919567138088">+91 95671 38088</a></li>
+            <li><a href="#">@k_l_7_garage</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&#169; 2026 KL7 Garage. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/k_l_7_garage" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    function toggleMobileNav() {
+      var h = document.getElementById('hamburger');
+      var d = document.getElementById('mobileDrawer');
+      var open = d.style.opacity === '1';
+      d.style.opacity = open ? '0' : '1';
+      d.style.pointerEvents = open ? 'none' : 'all';
+      document.body.style.overflow = open ? '' : 'hidden';
+    }
+  </script>
+</body>
+
+</html>
