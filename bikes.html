@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Bikes — NLT Garage</title>
+  <meta name="description" content="Browse our wide range of pre-owned bikes at NLT Garage."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Inter:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bikes.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" height="52"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li class="nav-active"><a href="bikes.html">BIKES</a></li>
+      <li><a href="sell.html">SELL YOUR BIKE</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="index.html#contact-section">CONTACT US</a></li>
+    </ul>
+    <div class="nav-admin">
+      <a href="admin-login.html" title="Admin Login">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="nav-mobile-drawer" id="mobileDrawer">
+    <button class="nav-mobile-close" onclick="toggleMobileNav()">&#10005;</button>
+    <a href="index.html">HOME</a>
+    <a href="bikes.html">BIKES</a>
+    <a href="sell.html">SELL YOUR BIKE</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="#">ABOUT</a>
+    <a href="index.html#contact-section">CONTACT US</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1 class="page-title">BROWSE BIKES</h1>
+      <p class="page-sub">Explore our wide range of per-owned bikes.</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="bikes-layout">
+
+    <!-- SIDEBAR FILTERS -->
+    <aside class="sidebar">
+      <div class="filter-group">
+        <h4 class="filter-label">BRANDS</h4>
+        <label class="filter-check"><input type="checkbox"/> Honda</label>
+        <label class="filter-check"><input type="checkbox"/> Suzuki</label>
+        <label class="filter-check"><input type="checkbox"/> Yamaha</label>
+        <label class="filter-check"><input type="checkbox"/> KTM</label>
+        <label class="filter-check"><input type="checkbox"/> Royal Enfield</label>
+        <label class="filter-check"><input type="checkbox"/> Triumph</label>
+        <label class="filter-check"><input type="checkbox"/> Kawasaki</label>
+      </div>
+
+      <div class="filter-group">
+        <h4 class="filter-label">PRICE RANGE</h4>
+        <input type="range" class="filter-range" min="0" max="2000000" value="1000000"/>
+        <div class="range-vals"><span>₹0</span><span>₹20,00,000</span></div>
+      </div>
+
+      <div class="filter-group">
+        <h4 class="filter-label">YEAR RANGE</h4>
+        <input type="range" class="filter-range" min="2010" max="2025" value="2020"/>
+        <div class="range-vals"><span>2010</span><span>2025</span></div>
+      </div>
+
+      <div class="filter-group">
+        <h4 class="filter-label">BODY TYPE</h4>
+        <label class="filter-check"><input type="checkbox"/> Cruiser</label>
+        <label class="filter-check"><input type="checkbox"/> Sports</label>
+        <label class="filter-check"><input type="checkbox"/> Adventure</label>
+        <label class="filter-check"><input type="checkbox"/> Naked</label>
+        <label class="filter-check"><input type="checkbox"/> Scooter</label>
+      </div>
+
+      <div class="filter-group">
+        <h4 class="filter-label">COLOR</h4>
+        <label class="filter-check"><input type="checkbox"/> Black</label>
+        <label class="filter-check"><input type="checkbox"/> White</label>
+        <label class="filter-check"><input type="checkbox"/> Red</label>
+        <label class="filter-check"><input type="checkbox"/> Blue</label>
+        <label class="filter-check"><input type="checkbox"/> Orange</label>
+      </div>
+
+      <div class="filter-group">
+        <h4 class="filter-label">KILOMETER DRIVEN</h4>
+        <input type="range" class="filter-range" min="0" max="100000" value="50000"/>
+        <div class="range-vals"><span>0 km</span><span>1,00,000 km</span></div>
+      </div>
+
+      <button class="btn-apply">APPLY FILTERS</button>
+      <button class="btn-reset">RESET</button>
+    </aside>
+
+    <!-- BIKES GRID AREA -->
+    <div class="bikes-main">
+      <div class="bikes-top-bar">
+        <span class="bikes-count">89 Bikes Found</span>
+        <div class="sort-wrap">
+          <label>Sort by:</label>
+          <select class="sort-select">
+            <option>Relevance</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest First</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bikes-grid">
+
+        <!-- Card 1 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Royal Enfield Shotgun 650"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Royal Enfield Shotgun 650</h3>
+              <p class="bike-meta"><span>2023</span> &bull; <span>4,200 km</span> &bull; <span>Black</span></p>
+              <p class="bike-price">&#8377;4,13,042</p>
+            </div>
+          </div>
+          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=400&q=80" alt="Triumph Bobber"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Triumph Racer Bobber</h3>
+              <p class="bike-meta"><span>2022</span> &bull; <span>8,100 km</span> &bull; <span>Matte Black</span></p>
+              <p class="bike-price">&#8377;12,87,500</p>
+            </div>
+          </div>
+          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&q=80" alt="KTM Duke 125"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>KTM DUKE 125</h3>
+              <p class="bike-meta"><span>2023</span> &bull; <span>3,500 km</span> &bull; <span>Orange</span></p>
+              <p class="bike-price">&#8377;1,66,218</p>
+            </div>
+          </div>
+          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=400&q=80" alt="Royal Enfield Classic 350"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Royal Enfield Classic 350</h3>
+              <p class="bike-meta"><span>2022</span> &bull; <span>12,000 km</span> &bull; <span>Chrome Red</span></p>
+              <p class="bike-price">&#8377;1,89,000</p>
+            </div>
+          </div>
+          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=400&q=80" alt="Yamaha MT-15"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Yamaha MT-15 V2</h3>
+              <p class="bike-meta"><span>2023</span> &bull; <span>5,600 km</span> &bull; <span>Ice Fluo</span></p>
+              <p class="bike-price">&#8377;1,58,000</p>
+            </div>
+          </div>
+          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1635073908681-b791b4a22c32?w=400&q=80" alt="Honda CB Hornet"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Honda CB Hornet 200R</h3>
+              <p class="bike-meta"><span>2021</span> &bull; <span>18,300 km</span> &bull; <span>Blue</span></p>
+              <p class="bike-price">&#8377;1,12,000</p>
+            </div>
+          </div>
+          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=80" alt="Bajaj Dominar 400"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Bajaj Dominar 400</h3>
+              <p class="bike-meta"><span>2022</span> &bull; <span>22,000 km</span> &bull; <span>Auroral Green</span></p>
+              <p class="bike-price">&#8377;1,74,000</p>
+            </div>
+          </div>
+          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1571805423144-2e0e7f8e5a63?w=400&q=80" alt="Suzuki Gixxer SF"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>Suzuki Gixxer SF 250</h3>
+              <p class="bike-meta"><span>2021</span> &bull; <span>14,900 km</span> &bull; <span>Glass Sparkle Black</span></p>
+              <p class="bike-price">&#8377;1,45,000</p>
+            </div>
+          </div>
+          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="bike-card-wrap">
+          <div class="bike-card">
+            <div class="bike-card-img">
+              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&q=80" alt="KTM Duke 390"/>
+            </div>
+            <div class="bike-card-info">
+              <h3>KTM DUKE 390</h3>
+              <p class="bike-meta"><span>2022</span> &bull; <span>9,800 km</span> &bull; <span>White</span></p>
+              <p class="bike-price">&#8377;2,85,000</p>
+            </div>
+          </div>
+          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
+        </div>
+
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <button class="page-btn">5</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA BANNER -->
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <h2>LOOKING FOR A<br>SPECIFIC BIKE?</h2>
+      <p>We may have upcoming stock not yet listed. Get in touch with us.</p>
+      <a href="#" class="btn-contact-cta">CONTACT US</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" />
+        <p>Your premium destination for pre-owned luxury motorcycles. We buy, sell, and trade.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="bikes.html">Bikes</a></li>
+            <li><a href="sell.html">Sell Your Bike</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>SUPPORT</h4>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CONTACT</h4>
+          <ul>
+            <li><a href="tel:+919567138088">+91 95671 38088</a></li>
+            <li><a href="#">@k_l_7_garage</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&#169; 2026 KL7 Garage. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/k_l_7_garage" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileNav() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobileDrawer').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
+    }
+  </script>
+</body>
+</html>

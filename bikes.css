@@ -1,0 +1,507 @@
+/* ════════ RESET & BASE ════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Arimo', Arial, sans-serif;
+  background: #fafafa;
+  color: #111;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ════════ NAV ════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  padding: 0 60px;
+}
+.nav-logo {
+  position: absolute;
+  left: 32px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-links {
+  display: flex;
+  gap: 44px;
+  list-style: none;
+  align-items: center;
+  margin: 0 auto;
+}
+.nav-links a {
+  font-family: 'Arimo', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.07em;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s, opacity 0.2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after,
+.nav-active a::after {
+  width: 100%;
+}
+.nav-links a:hover { opacity: 0.8; }
+
+.nav-admin {
+  position: absolute;
+  right: 60px;
+  display: flex;
+  align-items: center;
+}
+.nav-admin a {
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.nav-admin a:hover { opacity: 0.7; }
+
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  position: absolute;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1100;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.97); z-index: 1050; flex-direction: column; align-items: center; justify-content: center; gap: 8px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.nav-mobile-drawer.open { opacity: 1; pointer-events: all; }
+.nav-mobile-drawer a { font-family: 'Arimo', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.1em; color: #fff; text-decoration: none; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); width: 80%; text-align: center; transition: color 0.2s; }
+.nav-mobile-drawer a:hover { color: #ccc; }
+.nav-mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: #fff; font-size: 32px; cursor: pointer; line-height: 1; }
+
+/* ════════ PAGE HEADER ════════ */
+.page-header {
+  margin-top: 104px;
+  padding: 40px 20px 20px;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+.page-header-inner { max-width: 1280px; margin: 0 auto; }
+.page-title {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #111;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.page-sub {
+  font-weight: 400;
+  font-size: 16px;
+  color: #666;
+}
+
+/* ════════ LAYOUT ════════ */
+.bikes-layout {
+  display: flex;
+  gap: 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  align-items: flex-start;
+}
+
+/* ════════ SIDEBAR ════════ */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.04);
+  position: sticky;
+  top: 100px;
+}
+.filter-group {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.filter-group:last-of-type {
+  border-bottom: none;
+  margin-bottom: 16px;
+  padding-bottom: 0;
+}
+.filter-label {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: #111;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.filter-check:hover { color: #000; }
+.filter-check input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: #000;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.filter-range {
+  width: 100%;
+  accent-color: #000;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.range-vals {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #888;
+}
+.btn-apply {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+.btn-apply:hover { background: #222; }
+.btn-reset {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-reset:hover { background: #f5f5f5; border-color: #ccc; }
+
+/* ════════ BIKES MAIN ════════ */
+.bikes-main { flex: 1; min-width: 0; }
+
+.bikes-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.bikes-count {
+  font-weight: 700;
+  font-size: 20px;
+  color: #111;
+}
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #555;
+}
+.sort-select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.sort-select:focus { border-color: #000; }
+
+/* ════════ BIKES GRID ════════ */
+.bikes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* The card */
+.bike-card-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bike-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.bike-card:hover { 
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08); 
+  transform: translateY(-4px);
+}
+
+.bike-card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #f5f5f5;
+  position: relative;
+}
+.bike-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.bike-card:hover .bike-card-img img { transform: scale(1.05); }
+
+.bike-card-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.bike-card-info h3 {
+  font-weight: 700;
+  font-size: 18px;
+  color: #111;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.bike-meta {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bike-meta span {
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #333;
+}
+.bike-price {
+  font-weight: 700;
+  font-size: 20px;
+  color: #000;
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+/* VIEW DETAILS button inside card or below */
+.btn-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.05em;
+}
+.bike-card:hover .btn-view {
+  background: #000;
+  color: #fff;
+}
+
+/* ════════ PAGINATION ════════ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 60px;
+}
+.page-btn {
+  width: 40px; height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.page-btn.active, .page-btn:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* ════════ CTA BANNER ════════ */
+.cta-banner {
+  margin: 0 auto 60px;
+  max-width: 1280px;
+  border-radius: 16px;
+  background: #e8e8e8 url('assets/bikespagebottom.png') center/cover no-repeat;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.cta-banner-inner {
+  padding: 60px;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+.cta-banner h2 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #111;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.cta-banner p {
+  font-weight: 400;
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+.btn-contact-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  height: 48px;
+  background: #000;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.05em;
+}
+.btn-contact-cta:hover { background: #222; }
+.btn-contact-cta:active { transform: scale(0.98); }
+
+/* ════════ FOOTER ════════ */
+.footer {
+  background: #000;
+  padding: 80px 60px 30px;
+}
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  gap: 60px;
+}
+.footer-brand { flex: 1; max-width: 350px; }
+.footer-brand img { height: 48px; width: auto; object-fit: contain; margin-bottom: 16px; display: block; }
+.footer-brand h2 { display: none; }
+.footer-brand p { font-size: 15px; color: #bbb; line-height: 1.6; }
+.footer-links { display: flex; gap: 60px; }
+.footer-col h4 { font-weight: 700; font-size: 15px; letter-spacing: .1em; color: #fff; margin-bottom: 24px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a { font-size: 15px; color: #bbb; text-decoration: none; transition: color .2s; }
+.footer-col ul li a:hover { color: #fff; }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-social { display: flex; gap: 16px; }
+.footer-social a { color: #bbb; display: flex; align-items: center; transition: color .2s; }
+.footer-social a:hover { color: #fff; }
+.footer-bottom p { font-size: 14px; color: #bbb; }
+
+/* ════════ RESPONSIVE ════════ */
+@media (max-width: 900px) {
+  nav { height: 80px; padding: 0 20px; }
+  .nav-logo { left: 20px; }
+  .nav-logo img { height: 44px; }
+  .nav-links { display: none; }
+  .nav-admin { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-drawer { display: flex; }
+  .page-header { margin-top: 80px; }
+  .bikes-layout { flex-direction: column; padding: 24px 20px 60px; }
+  .sidebar { width: 100%; position: static; box-shadow: none; border: none; padding: 0; background: transparent; }
+  .footer-main { flex-direction: column; gap: 40px; }
+  .footer-links { flex-wrap: wrap; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+}
+@media (max-width: 600px) {
+  nav { height: 72px; padding: 0 16px; }
+  .nav-logo { left: 16px; }
+  .nav-logo img { height: 36px; }
+  .page-header { margin-top: 72px; }
+  .page-title { font-size: 28px; }
+  .bikes-top-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .cta-banner-inner { padding: 40px 24px; }
+  .cta-banner h2 { font-size: 28px; }
+  .cta-banner { min-height: 220px; }
+  .footer { padding: 48px 16px 20px; }
+  .footer-links { flex-direction: column; gap: 32px; }
+}

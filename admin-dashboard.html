@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — KL7 Garage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-header">
+    <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" class="sb-logo"/>
+    <button class="sb-close" onclick="closeSidebar()">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <nav class="sb-nav">
+    <a href="#" class="sb-link active" data-tab="home">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Overview</span>
+    </a>
+    <a href="#" class="sb-link" data-tab="inventory">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Inventory</span>
+    </a>
+    <a href="#" class="sb-link" data-tab="sell-requests">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Sell Requests</span>
+    </a>
+    <a href="#" class="sb-link" data-tab="enquiries">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span>Enquiries</span>
+      <span class="sb-badge">5</span>
+    </a>
+    <a href="#" class="sb-link" data-tab="gallery">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Gallery</span>
+    </a>
+
+    <div class="sb-divider"></div>
+
+    <a href="#" class="sb-link" data-tab="settings">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sb-footer">
+    <a href="index.html" class="sb-footer-link" target="_blank">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View Live Site
+    </a>
+    <button class="sb-logout" onclick="logout()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Sign Out
+    </button>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="openSidebar()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/></svg>
+      </button>
+      <div class="topbar-crumb">
+        <span class="topbar-brand">KL7 Garage</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" opacity=".4"><polyline points="9 18 15 12 9 6"/></svg>
+        <span class="topbar-page" id="topbarTitle">Overview</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="notif-wrap" id="notifWrap">
+        <button class="notif-btn" id="notifBtn" onclick="toggleNotifications()" aria-label="Notifications">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span class="notif-dot" id="notifDot">3</span>
+        </button>
+        <div class="notif-dropdown" id="notifDropdown">
+          <div class="notif-dropdown-head">
+            <h3>Notifications</h3>
+            <button class="notif-mark-all" onclick="markAllNotifsRead()">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notifList">
+            <div class="notif-item unread">
+              <div class="notif-icon green">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="notif-body">
+                <p><strong>New sell request</strong> from Rahul M. — Honda CB300R</p>
+                <time>2 hours ago</time>
+              </div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon blue">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <div class="notif-body">
+                <p><strong>New enquiry</strong> from Kiran Thomas about Royal Enfield Shotgun 650</p>
+                <time>2 hours ago</time>
+              </div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon blue">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <div class="notif-body">
+                <p><strong>New enquiry</strong> from Priya Nair about Triumph Racer Bobber</p>
+                <time>5 hours ago</time>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon amber">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div class="notif-body">
+                <p><strong>Bike listed</strong> — KTM Duke 390 added to inventory</p>
+                <time>Yesterday</time>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon green">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="notif-body">
+                <p><strong>New sell request</strong> from Arjun P. — Bajaj Dominar 400</p>
+                <time>Yesterday</time>
+              </div>
+            </div>
+          </div>
+          <div class="notif-dropdown-foot">
+            <a href="#" onclick="switchTab('enquiries'); toggleNotifications(); return false;">View all enquiries</a>
+          </div>
+        </div>
+      </div>
+      <div class="topbar-admin">
+        <div class="admin-avatar">A</div>
+        <div class="admin-info">
+          <span class="admin-name">Admin</span>
+          <span class="admin-role">KL7 Garage</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── OVERVIEW ── -->
+  <section class="tab-content active" id="tab-home">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Good morning, Admin</h1>
+        <p class="page-sub">Here's what's happening at KL7 Garage today.</p>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-blue">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m-4 12H21a2 2 0 002-2v-5a2 2 0 00-2-2h-7a2 2 0 00-2 2v5a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="kpi-body">
+          <span class="kpi-label">Bikes Listed</span>
+          <strong class="kpi-val">24</strong>
+          <span class="kpi-delta up">+3 this week</span>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-green">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="kpi-body">
+          <span class="kpi-label">Sell Requests</span>
+          <strong class="kpi-val">8</strong>
+          <span class="kpi-delta up">+2 new</span>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-purple">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="kpi-body">
+          <span class="kpi-label">Enquiries</span>
+          <strong class="kpi-val">15</strong>
+          <span class="kpi-delta warn">5 unread</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-head"><h2>Recent Activity</h2></div>
+        <div class="activity-feed">
+          <div class="af-item">
+            <div class="af-dot green"></div>
+            <div class="af-body">
+              <p><strong>New sell request</strong> — Rahul M. submitted Honda CB300R details</p>
+              <time>2 hours ago</time>
+            </div>
+          </div>
+          <div class="af-item">
+            <div class="af-dot blue"></div>
+            <div class="af-body">
+              <p><strong>Enquiry received</strong> — Question about Royal Enfield Shotgun 650</p>
+              <time>4 hours ago</time>
+            </div>
+          </div>
+          <div class="af-item">
+            <div class="af-dot amber"></div>
+            <div class="af-body">
+              <p><strong>Bike listed</strong> — KTM Duke 390 added to inventory</p>
+              <time>Yesterday</time>
+            </div>
+          </div>
+          <div class="af-item">
+            <div class="af-dot green"></div>
+            <div class="af-body">
+              <p><strong>New sell request</strong> — Arjun P. submitted Bajaj Dominar 400</p>
+              <time>Yesterday</time>
+            </div>
+          </div>
+          <div class="af-item">
+            <div class="af-dot red"></div>
+            <div class="af-body">
+              <p><strong>Bike removed</strong> — Yamaha R15 sold and de-listed</p>
+              <time>2 days ago</time>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>Quick Actions</h2></div>
+        <div class="quick-actions">
+          <button class="qa-btn" onclick="switchTab('inventory'); openAddBike()">
+            <div class="qa-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span>List a Bike</span>
+          </button>
+          <button class="qa-btn" onclick="switchTab('sell-requests')">
+            <div class="qa-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <span>Sell Requests</span>
+          </button>
+          <button class="qa-btn" onclick="switchTab('enquiries')">
+            <div class="qa-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <span>Enquiries</span>
+          </button>
+          <a href="index.html" target="_blank" class="qa-btn">
+            <div class="qa-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </div>
+            <span>View Site</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INVENTORY ── -->
+  <section class="tab-content" id="tab-inventory">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Inventory</h1>
+        <p class="page-sub">Manage bikes listed on the customer-facing store.</p>
+      </div>
+      <button class="btn-primary" onclick="openAddBike()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add New Bike
+      </button>
+    </div>
+
+    <div class="panel" style="padding:0;overflow:hidden;">
+      <div class="table-toolbar">
+        <div class="search-box">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search bikes…" id="bikeSearch" oninput="filterBikes()"/>
+        </div>
+        <select class="filter-select" onchange="filterBikes()" id="statusFilter">
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="sold">Sold</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="inventoryTable">
+          <thead>
+            <tr>
+              <th>Bike</th>
+              <th>Year</th>
+              <th>Price</th>
+              <th>Km Driven</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryBody">
+            <tr data-name="Royal Enfield Shotgun 650" data-status="active">
+              <td>
+                <div class="bike-cell">
+                  <div class="bike-thumb"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&q=70" alt=""/></div>
+                  <div>
+                    <p class="bike-name">Royal Enfield Shotgun 650</p>
+                    <p class="bike-brand">Royal Enfield · Black</p>
+                  </div>
+                </div>
+              </td>
+              <td>2023</td>
+              <td class="price-cell">₹4,13,042</td>
+              <td>4,200 km</td>
+              <td><span class="badge active">Active</span></td>
+              <td>
+                <div class="row-actions">
+                  <button class="icon-btn" title="Edit" onclick="openEditBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="icon-btn danger" title="Delete" onclick="deleteBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-name="Triumph Racer Bobber" data-status="active">
+              <td>
+                <div class="bike-cell">
+                  <div class="bike-thumb"><img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=100&q=70" alt=""/></div>
+                  <div>
+                    <p class="bike-name">Triumph Racer Bobber</p>
+                    <p class="bike-brand">Triumph · Matte Black</p>
+                  </div>
+                </div>
+              </td>
+              <td>2022</td>
+              <td class="price-cell">₹12,87,500</td>
+              <td>8,100 km</td>
+              <td><span class="badge active">Active</span></td>
+              <td>
+                <div class="row-actions">
+                  <button class="icon-btn" title="Edit" onclick="openEditBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="icon-btn danger" title="Delete" onclick="deleteBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-name="KTM Duke 125" data-status="active">
+              <td>
+                <div class="bike-cell">
+                  <div class="bike-thumb"><img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=100&q=70" alt=""/></div>
+                  <div>
+                    <p class="bike-name">KTM Duke 125</p>
+                    <p class="bike-brand">KTM · Orange</p>
+                  </div>
+                </div>
+              </td>
+              <td>2023</td>
+              <td class="price-cell">₹1,66,218</td>
+              <td>3,500 km</td>
+              <td><span class="badge active">Active</span></td>
+              <td>
+                <div class="row-actions">
+                  <button class="icon-btn" title="Edit" onclick="openEditBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="icon-btn danger" title="Delete" onclick="deleteBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-name="Yamaha R15 V4" data-status="sold">
+              <td>
+                <div class="bike-cell">
+                  <div class="bike-thumb"><img src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=100&q=70" alt=""/></div>
+                  <div>
+                    <p class="bike-name">Yamaha R15 V4</p>
+                    <p class="bike-brand">Yamaha · Racing Blue</p>
+                  </div>
+                </div>
+              </td>
+              <td>2022</td>
+              <td class="price-cell">₹1,72,000</td>
+              <td>11,000 km</td>
+              <td><span class="badge sold">Sold</span></td>
+              <td>
+                <div class="row-actions">
+                  <button class="icon-btn" title="Edit" onclick="openEditBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  </button>
+                  <button class="icon-btn danger" title="Delete" onclick="deleteBike(this)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SELL REQUESTS ── -->
+  <section class="tab-content" id="tab-sell-requests">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Sell Requests</h1>
+        <p class="page-sub">Bikes submitted by customers for valuation.</p>
+      </div>
+    </div>
+    <div class="panel" style="padding:0;overflow:hidden;">
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Seller</th><th>Bike</th><th>Year</th><th>Km</th><th>Asking Price</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="person-cell"><div class="avatar-xs">R</div>Rahul M.</div></td>
+              <td>Honda CB300R</td><td>2023</td><td>6,200</td><td>₹2,40,000</td><td>13 Jun 2026</td>
+              <td><span class="badge new">New</span></td>
+              <td><button class="btn-sm" onclick="viewSellRequest(this)">View</button></td>
+            </tr>
+            <tr>
+              <td><div class="person-cell"><div class="avatar-xs">A</div>Arjun P.</div></td>
+              <td>Bajaj Dominar 400</td><td>2022</td><td>22,000</td><td>₹1,80,000</td><td>12 Jun 2026</td>
+              <td><span class="badge new">New</span></td>
+              <td><button class="btn-sm" onclick="viewSellRequest(this)">View</button></td>
+            </tr>
+            <tr>
+              <td><div class="person-cell"><div class="avatar-xs">S</div>Sneha Raj</div></td>
+              <td>Yamaha R15 V4</td><td>2023</td><td>5,200</td><td>₹1,45,000</td><td>12 Jun 2026</td>
+              <td><span class="badge active">Accepted</span></td>
+              <td><button class="btn-sm" onclick="viewSellRequest(this)">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ENQUIRIES ── -->
+  <section class="tab-content" id="tab-enquiries">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Enquiries</h1>
+        <p class="page-sub">Messages from potential buyers.</p>
+      </div>
+      <span class="badge new" style="font-size:13px;padding:6px 14px;" id="unreadBadge">5 Unread</span>
+    </div>
+
+    <div class="panel" style="padding:0;overflow:hidden;">
+      <div class="enquiry-list" id="enquiryList">
+        <div class="enq-item unread">
+          <div class="enq-row">
+            <div class="avatar-sm">K</div>
+            <div class="enq-meta">
+              <div class="enq-top">
+                <strong>Kiran Thomas</strong>
+                <time>2h ago</time>
+                <span class="badge new sm">Unread</span>
+              </div>
+              <p class="enq-subject">Re: Royal Enfield Shotgun 650 — Is it still available?</p>
+            </div>
+          </div>
+          <p class="enq-preview">Hi, I saw the Royal Enfield Shotgun 650 listed for ₹4,13,042. Is it still available? Can we arrange a test ride this weekend?</p>
+          <div class="enq-actions">
+            <button class="btn-sm" onclick="markRead(this)">Mark as Read</button>
+            <button class="btn-sm btn-sm-dark" onclick="replyEnquiry('Kiran Thomas')">Reply</button>
+          </div>
+        </div>
+        <div class="enq-item unread">
+          <div class="enq-row">
+            <div class="avatar-sm">P</div>
+            <div class="enq-meta">
+              <div class="enq-top">
+                <strong>Priya Nair</strong>
+                <time>5h ago</time>
+                <span class="badge new sm">Unread</span>
+              </div>
+              <p class="enq-subject">Interested in Triumph Racer Bobber</p>
+            </div>
+          </div>
+          <p class="enq-preview">Hello, I'm interested in the Triumph Racer Bobber. What is the final price? Are there any scratches or issues I should know about?</p>
+          <div class="enq-actions">
+            <button class="btn-sm" onclick="markRead(this)">Mark as Read</button>
+            <button class="btn-sm btn-sm-dark" onclick="replyEnquiry('Priya Nair')">Reply</button>
+          </div>
+        </div>
+        <div class="enq-item">
+          <div class="enq-row">
+            <div class="avatar-sm">M</div>
+            <div class="enq-meta">
+              <div class="enq-top">
+                <strong>Mohammed Rizwan</strong>
+                <time>1 day ago</time>
+                <span class="badge reviewed sm">Read</span>
+              </div>
+              <p class="enq-subject">KTM Duke 125 — ownership documents?</p>
+            </div>
+          </div>
+          <p class="enq-preview">Can you please confirm if all RC and insurance documents are available for the KTM Duke 125? Also, is the price negotiable?</p>
+          <div class="enq-actions">
+            <button class="btn-sm btn-sm-dark" onclick="replyEnquiry('Mohammed Rizwan')">Reply</button>
+          </div>
+        </div>
+        <div class="enq-item">
+          <div class="enq-row">
+            <div class="avatar-sm">D</div>
+            <div class="enq-meta">
+              <div class="enq-top">
+                <strong>Dev Kumar</strong>
+                <time>2 days ago</time>
+                <span class="badge reviewed sm">Read</span>
+              </div>
+              <p class="enq-subject">Looking for a cruiser under ₹3L</p>
+            </div>
+          </div>
+          <p class="enq-preview">Hi team, I'm looking for a cruiser style bike under ₹3 lakhs. Do you have anything available currently or expected soon?</p>
+          <div class="enq-actions">
+            <button class="btn-sm btn-sm-dark" onclick="replyEnquiry('Dev Kumar')">Reply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY ── -->
+  <section class="tab-content" id="tab-gallery">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Gallery</h1>
+        <p class="page-sub">Your Instagram feed, curated automatically.</p>
+      </div>
+      <a href="gallery.html" target="_blank" class="btn-primary">View Live Gallery</a>
+    </div>
+    <div class="panel gallery-info">
+      <div class="gallery-icon">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <h3>Instagram Feed via Curator.io</h3>
+      <p>Your gallery page automatically pulls posts from <strong>@k_l_7_garage</strong> on Instagram using Curator.io. Photos you post on Instagram will appear here automatically — no manual uploads needed.</p>
+      <a href="https://curator.io/login" target="_blank" class="btn-primary" style="margin-top:8px;">Open Curator.io Dashboard →</a>
+    </div>
+  </section>
+
+  <!-- ── SETTINGS ── -->
+  <section class="tab-content" id="tab-settings">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Settings</h1>
+        <p class="page-sub">Manage your site information and admin credentials.</p>
+      </div>
+    </div>
+    <div class="settings-grid">
+      <div class="panel">
+        <div class="panel-head"><h2>Business Info</h2></div>
+        <div class="settings-form">
+          <div class="sf-field"><label>Business Name</label><input type="text" value="KL7 Garage"/></div>
+          <div class="sf-field"><label>Phone Number</label><input type="text" value="+91 95671 38088"/></div>
+          <div class="sf-field"><label>Instagram Handle</label><input type="text" value="@k_l_7_garage"/></div>
+          <div class="sf-field"><label>Address</label><input type="text" placeholder="Enter your address"/></div>
+          <button class="btn-primary" style="margin-top:8px;">Save Changes</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Admin Credentials</h2></div>
+        <div class="settings-form">
+          <div class="sf-field"><label>Admin ID</label><input type="text" value="kl7admin"/></div>
+          <div class="sf-field"><label>New Password</label><input type="password" placeholder="Enter new password"/></div>
+          <div class="sf-field"><label>Confirm Password</label><input type="password" placeholder="Confirm new password"/></div>
+          <button class="btn-primary" style="margin-top:8px;">Update Credentials</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- ═══════════════ OVERLAY (mobile sidebar) ═══════════════ -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- ═══════════════ ADD / EDIT BIKE MODAL ═══════════════ -->
+<div class="modal-bg" id="bikeModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">Add New Bike</h2>
+      <button class="modal-x" onclick="closeModal()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Images first -->
+      <div class="modal-section-label">Photos <span class="label-hint">(multiple images, first is the cover)</span></div>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()" ondragover="dragOver(event)" ondrop="dropFiles(event)">
+        <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handleFiles(this.files)"/>
+        <div class="upload-prompt" id="uploadPrompt">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>Drag &amp; drop photos here, or <span>browse</span></p>
+          <small>JPG, PNG, WEBP — up to 10MB each</small>
+        </div>
+        <div class="photo-preview-grid" id="photoGrid"></div>
+      </div>
+
+      <div class="modal-section-label" style="margin-top:24px;">Bike Details</div>
+      <div class="form-grid">
+        <div class="ff"><label>Bike Name <span class="req">*</span></label><input type="text" id="f-name" placeholder="e.g. Royal Enfield Shotgun 650"/></div>
+        <div class="ff"><label>Brand <span class="req">*</span></label><input type="text" id="f-brand" placeholder="e.g. Royal Enfield"/></div>
+        <div class="ff"><label>Year <span class="req">*</span></label><input type="number" id="f-year" placeholder="2023" min="2000" max="2030"/></div>
+        <div class="ff"><label>Price (₹) <span class="req">*</span></label><input type="text" id="f-price" placeholder="4,13,042"/></div>
+        <div class="ff"><label>Km Driven</label><input type="text" id="f-km" placeholder="4,200"/></div>
+        <div class="ff"><label>Color</label><input type="text" id="f-color" placeholder="Black"/></div>
+        <div class="ff"><label>Ownership</label>
+          <select id="f-owner">
+            <option value="1st Owner">1st Owner</option>
+            <option value="2nd Owner">2nd Owner</option>
+            <option value="3rd+ Owner">3rd+ Owner</option>
+          </select>
+        </div>
+        <div class="ff"><label>Fuel Type</label>
+          <select id="f-fuel">
+            <option>Petrol</option>
+            <option>Electric</option>
+          </select>
+        </div>
+        <div class="ff"><label>Status</label>
+          <select id="f-status">
+            <option value="active">Active</option>
+            <option value="sold">Sold</option>
+          </select>
+        </div>
+      </div>
+      <div class="ff" style="margin-top:4px;"><label>Description</label><textarea id="f-desc" rows="3" placeholder="Describe the bike — service history, condition, highlights…"></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveBike()" id="saveBtn">Add to Inventory</button>
+    </div>
+  </div>
+</div>
+
+<!-- SELL REQUEST VIEW MODAL -->
+<div class="modal-bg" id="sellModal">
+  <div class="modal" style="max-width:520px;">
+    <div class="modal-head">
+      <h2>Sell Request</h2>
+      <button class="modal-x" onclick="document.getElementById('sellModal').classList.remove('open')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="sellModalBody">
+      <!-- filled by JS -->
+    </div>
+    <div class="modal-foot">
+      <button class="btn-ghost" onclick="document.getElementById('sellModal').classList.remove('open')">Close</button>
+      <button class="btn-primary">Accept &amp; Contact</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
