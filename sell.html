@@ -100,21 +100,21 @@
         <div class="form-grid-3">
           <div class="input-group">
             <label>Bike Brand*</label>
-            <input type="text" placeholder="Enter Brand Name">
+            <input type="text" id="f-brand" placeholder="Enter Brand Name">
           </div>
           <div class="input-group">
             <label>Model Name*</label>
-            <input type="text" placeholder="Enter Model Name">
+            <input type="text" id="f-model" placeholder="Enter Model Name">
           </div>
           <div class="input-group">
             <label>Registration Year*</label>
-            <input type="text" placeholder="DD/MM/YYYY">
+            <input type="text" id="f-regyear" placeholder="DD/MM/YYYY">
           </div>
         </div>
         <div class="form-grid-3">
           <div class="input-group">
             <label>Kilometers Driven*</label>
-            <input type="text" placeholder="Enter Kilometers">
+            <input type="text" id="f-km" placeholder="Enter Kilometers">
           </div>
         </div>
       </div>
@@ -131,11 +131,11 @@
           <div class="input-group">
             <label>Ownership*</label>
             <div class="select-wrapper">
-              <select>
+              <select id="f-ownership">
                 <option value="" disabled selected>Select Ownership</option>
-                <option value="1">1st Owner</option>
-                <option value="2">2nd Owner</option>
-                <option value="3">3rd+ Owner</option>
+                <option value="1st Owner">1st Owner</option>
+                <option value="2nd Owner">2nd Owner</option>
+                <option value="3rd+ Owner">3rd+ Owner</option>
               </select>
               <div class="select-icon">V</div>
             </div>
@@ -169,11 +169,13 @@
             <p>Upload clear photos of your bike from different angles.</p>
           </div>
         </div>
-        <div class="upload-box">
+        <div class="upload-box" id="uploadZone" onclick="document.getElementById('sellPhotoInput').click()" style="cursor:pointer; position:relative;">
+          <input type="file" id="sellPhotoInput" multiple accept="image/*" style="display:none"/>
           <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           <h4>Drag & drop image here</h4>
           <p>or click to upload from camera roll</p>
           <span class="upload-hint">JPG, PNG OR WEBP (Max. 5MB each)</span>
+          <div id="sellPhotoPreviewGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-top: 12px; width: 100%;"></div>
         </div>
       </div>
 
@@ -188,21 +190,21 @@
         <div class="form-grid-3">
           <div class="input-group">
             <label>Full Name*</label>
-            <input type="text" placeholder="Enter Full Name">
+            <input type="text" id="f-name" placeholder="Enter Full Name">
           </div>
           <div class="input-group">
             <label>Phone Number*</label>
-            <input type="tel" placeholder="Enter Phone Number">
+            <input type="tel" id="f-phone" placeholder="Enter Phone Number">
           </div>
           <div class="input-group">
             <label>Location*</label>
-            <input type="text" placeholder="Enter Location">
+            <input type="text" id="f-location" placeholder="Enter Location">
           </div>
         </div>
         <div class="form-grid-3">
           <div class="input-group" style="grid-column: span 2;">
             <label>Email Address*</label>
-            <input type="email" placeholder="Enter Email Address" style="width: 100%; max-width: 503px;">
+            <input type="email" id="f-email" placeholder="Enter Email Address" style="width: 100%; max-width: 503px;">
           </div>
         </div>
       </div>
@@ -265,6 +267,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
   <script>
     function toggleMobileNav() {
       const hamburger = document.getElementById('hamburger');
@@ -275,6 +279,164 @@
       drawer.classList.toggle('open', !isOpen);
       overlay.classList.toggle('open', !isOpen);
       document.body.style.overflow = !isOpen ? 'hidden' : '';
+    }
+
+    let sellPhotoFiles = [];
+
+    // Drag and drop setup
+    const zone = document.getElementById('uploadZone');
+    if (zone) {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.style.borderColor = '#000';
+      });
+      zone.addEventListener('dragleave', () => {
+        zone.style.borderColor = '';
+      });
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.style.borderColor = '';
+        if (e.dataTransfer.files) {
+          handleSelectedPhotos(e.dataTransfer.files);
+        }
+      });
+    }
+
+    const photoInput = document.getElementById('sellPhotoInput');
+    if (photoInput) {
+      photoInput.addEventListener('change', (e) => {
+        if (e.target.files) {
+          handleSelectedPhotos(e.target.files);
+        }
+      });
+    }
+
+    function handleSelectedPhotos(files) {
+      const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+      Array.from(files).forEach(file => {
+        if (!allowed.includes(file.type)) return;
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`${file.name} is too large. Max 5MB.`);
+          return;
+        }
+        sellPhotoFiles.push(file);
+      });
+      renderPhotoPreviews();
+      if (photoInput) photoInput.value = '';
+    }
+
+    function renderPhotoPreviews() {
+      const grid = document.getElementById('sellPhotoPreviewGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      sellPhotoFiles.forEach((file, i) => {
+        const url = URL.createObjectURL(file);
+        const item = document.createElement('div');
+        item.style.position = 'relative';
+        item.style.aspectRatio = '4/3';
+        item.style.borderRadius = '4px';
+        item.style.overflow = 'hidden';
+        item.style.border = '1px solid #ddd';
+        item.innerHTML = `
+          <img src="${url}" style="width: 100%; height: 100%; object-fit: cover;" alt="${file.name}"/>
+          <button type="button" style="position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,0.6); color: #fff; border: none; border-radius: 50%; width: 18px; height: 18px; line-height: 18px; font-size: 11px; cursor: pointer; z-index: 10;" onclick="removePhoto(${i}, event)">×</button>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    window.removePhoto = function(idx, e) {
+      e.stopPropagation();
+      sellPhotoFiles.splice(idx, 1);
+      renderPhotoPreviews();
+    }
+
+    // Submit handler
+    const submitBtn = document.querySelector('.btn-submit');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const val = (id) => {
+          const el = document.getElementById(id);
+          return el ? el.value.trim() : '';
+        };
+
+        const brand = val('f-brand');
+        const model = val('f-model');
+        const regYear = val('f-regyear');
+        const km = val('f-km');
+        const ownership = val('f-ownership');
+        const name = val('f-name');
+        const phone = val('f-phone');
+        const location = val('f-location');
+        const email = val('f-email');
+
+        if (!brand || !model || !name || !phone || !email) {
+          alert('Please fill in all required fields marked with *.');
+          return;
+        }
+
+        const insuranceEl = document.querySelector('input[name="insurance"]:checked');
+        const insurance = insuranceEl ? insuranceEl.parentElement.textContent.trim() : 'Active';
+        
+        const conditionEl = document.querySelector('input[name="condition"]:checked');
+        const condition = conditionEl ? conditionEl.parentElement.textContent.trim() : 'Excellent';
+
+        submitBtn.disabled = true;
+        const origText = submitBtn.textContent;
+        submitBtn.textContent = 'SUBMITTING...';
+
+        const { data: req, error } = await supabase.from('sell_requests').insert({
+          brand,
+          model,
+          registration_year: regYear,
+          km_driven: Number(km) || 0,
+          ownership,
+          insurance_status: insurance,
+          condition,
+          seller_name: name,
+          phone,
+          location,
+          email
+        }).select().single();
+
+        if (error) {
+          console.error(error);
+          alert('Failed to submit sell request. Please try again.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+          return;
+        }
+
+        // Upload photos
+        if (sellPhotoFiles.length > 0) {
+          for (const file of sellPhotoFiles) {
+            const path = `sell-requests/${req.id}/${Date.now()}-${file.name}`;
+            const { error: uploadError } = await supabase.storage.from('bike-photos').upload(path, file);
+            
+            if (!uploadError) {
+              const { data: pub } = supabase.storage.from('bike-photos').getPublicUrl(path);
+              await supabase.from('sell_request_photos').insert({
+                sell_request_id: req.id,
+                image_url: pub.publicUrl
+              });
+            }
+          }
+        }
+
+        alert('Thanks! Our team will contact you with a valuation shortly.');
+        
+        // Clear inputs
+        ['f-brand', 'f-model', 'f-regyear', 'f-km', 'f-ownership', 'f-name', 'f-phone', 'f-location', 'f-email'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        sellPhotoFiles = [];
+        renderPhotoPreviews();
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = origText;
+      });
     }
   </script>
 </body>

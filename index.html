@@ -245,7 +245,7 @@
         <p>Have questions about a bike, pricing, or want to book a test ride? Drop us a message and our team will get right back to you.</p>
       </div>
       <div class="contact-form-wrap">
-        <form class="contact-form" onsubmit="return false;">
+        <form class="contact-form" id="contactForm">
           <div class="form-group">
             <label>Full Name</label>
             <input type="text" placeholder="Enter Your full Name"/>
@@ -368,6 +368,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
   <script src="script.js"></script>
   <script>
     function toggleMobileNav() {
@@ -380,6 +382,71 @@
       overlay.classList.toggle('open', !isOpen);
       document.body.style.overflow = !isOpen ? 'hidden' : '';
     }
+
+    async function loadLatestBikes() {
+      const { data, error } = await supabase
+        .from('bikes')
+        .select('*, bike_photos(image_url, sort_order)')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false })
+        .limit(3);
+      if (error) {
+        console.error(error);
+        return;
+      }
+      const grid = document.querySelector('.collections-grid');
+      if (!grid) return;
+      if (data && data.length > 0) {
+        grid.innerHTML = data.map(b => {
+          const cover = b.cover_image || (b.bike_photos?.[0]?.image_url) || 'assets/placeholder.png';
+          const luxuryTag = b.is_luxury ? `<span class="luxury-tag">LUXURY</span>` : '';
+          const luxuryClass = b.is_luxury ? ' luxury' : '';
+          return `
+            <div class="bike-card${luxuryClass}">
+              <div class="bike-card-img">
+                ${luxuryTag}
+                <img src="${cover}" alt="${b.name}"/>
+              </div>
+              <div class="bike-card-info">
+                <h3>${b.name}</h3>
+                <p class="bike-price">&#8377;${b.price.toLocaleString('en-IN')}</p>
+                <a href="bike-details.html?id=${b.id}" class="btn-card">VIEW DETAILS</a>
+              </div>
+            </div>`;
+        }).join('');
+      }
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = e.target.querySelector('input[placeholder*="Name"]').value.trim();
+      const email = e.target.querySelector('input[type="email"]').value.trim();
+      const phone = e.target.querySelector('input[type="tel"]').value.trim();
+      const message = e.target.querySelector('textarea').value.trim();
+
+      if (!name || !message) {
+        alert('Please enter your Name and Message.');
+        return;
+      }
+
+      const { error } = await supabase.from('enquiries').insert({
+        full_name: name,
+        email: email,
+        phone: phone,
+        message: message
+      });
+
+      if (error) {
+        console.error(error);
+        alert('Something went wrong. Please try again.');
+        return;
+      }
+
+      alert('Message sent! We will get back to you soon.');
+      e.target.reset();
+    });
+
+    document.addEventListener('DOMContentLoaded', loadLatestBikes);
   </script>
 </body>
 </html>

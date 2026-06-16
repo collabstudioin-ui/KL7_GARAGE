@@ -144,20 +144,121 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
   <script>
     function toggleMobileNav() {
       document.getElementById('hamburger').classList.toggle('open');
       document.getElementById('mobileDrawer').classList.toggle('open');
       document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
     }
-    // Thumbnail switcher
-    document.querySelectorAll('.thumb-row img').forEach(img => {
-      img.addEventListener('click', () => {
-        document.querySelector('.main-img').src = img.src.replace('w=200', 'w=800');
-        document.querySelectorAll('.thumb-row img').forEach(t => t.classList.remove('active'));
-        img.classList.add('active');
-      });
-    });
+
+    async function loadBikeDetails() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) {
+        document.querySelector('.bike-details-container').innerHTML = '<div style="text-align: center; padding: 80px 20px; color: #888;">No bike ID provided in URL. <a href="bikes.html" style="color: #000; text-decoration: underline;">Browse Bikes</a></div>';
+        return;
+      }
+
+      const { data: bike, error } = await supabase.from('bikes').select('*').eq('id', id).single();
+      if (error || !bike) {
+        document.querySelector('.bike-details-container').innerHTML = '<div style="text-align: center; padding: 80px 20px; color: #888;">Bike not found or has been sold. <a href="bikes.html" style="color: #000; text-decoration: underline;">Browse Bikes</a></div>';
+        return;
+      }
+
+      const { data: photos } = await supabase
+        .from('bike_photos')
+        .select('*')
+        .eq('bike_id', id)
+        .order('sort_order', { ascending: true });
+
+      // Update breadcrumb and title
+      const breadcrumbSpan = document.querySelector('.breadcrumb span');
+      if (breadcrumbSpan) {
+        breadcrumbSpan.innerHTML = `<a href="bikes.html">Bikes</a> &gt; <span style="color: #000; font-weight: 600;">${bike.name}</span>`;
+      }
+
+      document.querySelector('.details-info h1').textContent = bike.name;
+      document.querySelector('.details-info .price').innerHTML = `&#8377;${bike.price.toLocaleString('en-IN')}`;
+      
+      const specItems = document.querySelectorAll('.spec-item strong');
+      if (specItems.length >= 4) {
+        specItems[0].textContent = bike.year;
+        specItems[1].textContent = `${Number(bike.km_driven).toLocaleString('en-IN')} km`;
+        specItems[2].textContent = bike.color || '—';
+        specItems[3].textContent = bike.ownership || '1st Owner';
+      }
+
+      document.querySelector('.description p').textContent = bike.description || 'No description available.';
+
+      // Gallery update
+      const imgs = (photos && photos.length > 0) ? photos.map(p => p.image_url) : [bike.cover_image || 'assets/placeholder.png'];
+      const mainImg = document.querySelector('.main-img');
+      if (mainImg) {
+        mainImg.src = imgs[0];
+        mainImg.alt = bike.name;
+      }
+
+      const thumbRow = document.querySelector('.thumb-row');
+      if (thumbRow) {
+        thumbRow.innerHTML = imgs.map((src, i) =>
+          `<img src="${src}" alt="Thumb" class="${i === 0 ? 'active' : ''}">`
+        ).join('');
+
+        // Thumbnail switcher
+        document.querySelectorAll('.thumb-row img').forEach(img => {
+          img.addEventListener('click', () => {
+            if (mainImg) mainImg.src = img.src;
+            document.querySelectorAll('.thumb-row img').forEach(t => t.classList.remove('active'));
+            img.classList.add('active');
+          });
+        });
+      }
+
+      // Luxury tag
+      if (bike.is_luxury) {
+        const tag = document.createElement('span');
+        tag.className = 'luxury-tag';
+        tag.textContent = 'LUXURY';
+        const gallery = document.querySelector('.details-gallery');
+        if (gallery) {
+          gallery.style.position = 'relative';
+          gallery.prepend(tag);
+        }
+      }
+
+      // Buy Button Listener
+      const buyBtn = document.querySelector('.btn-buy');
+      if (buyBtn) {
+        buyBtn.onclick = async () => {
+          const fullName = prompt("Enter your Full Name to inquire about this bike:");
+          if (!fullName) return;
+          const phone = prompt("Enter your Phone Number:");
+          if (!phone) return;
+          const email = prompt("Enter your Email Address (Optional):") || '';
+          const message = prompt("Enter your message:", `Hi, I am interested in buying the ${bike.name}. Please contact me.`);
+          if (!message) return;
+
+          const { error: enqError } = await supabase.from('enquiries').insert({
+            bike_id: bike.id,
+            full_name: fullName,
+            email: email,
+            phone: phone,
+            message: message
+          });
+
+          if (enqError) {
+            console.error(enqError);
+            alert('Something went wrong. Please try again.');
+            return;
+          }
+
+          alert('Enquiry submitted successfully! Our team will contact you soon.');
+        };
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBikeDetails);
   </script>
 </body>
 </html>

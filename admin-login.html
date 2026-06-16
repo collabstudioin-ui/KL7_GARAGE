@@ -347,25 +347,22 @@
 
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
   <script>
-    // Admin credentials — move to backend when integrating
-    const ADMIN_ID = 'kl7admin';
-    const ADMIN_PASS = 'kl7@2026';
-
-    function handleLogin(e) {
+    async function handleLogin(e) {
       e.preventDefault();
-      const id = document.getElementById('adminId').value.trim();
-      const pass = document.getElementById('adminPass').value;
+      const email = document.getElementById('adminId').value.trim();
+      const password = document.getElementById('adminPass').value;
       const err = document.getElementById('errorMsg');
 
-      if (id === ADMIN_ID && pass === ADMIN_PASS) {
-        // Set session flag
-        sessionStorage.setItem('kl7_admin', 'true');
-        window.location.href = 'admin-dashboard.html';
-      } else {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
         err.classList.add('show');
         document.getElementById('adminPass').value = '';
+        return;
       }
+      window.location.href = 'admin-dashboard.html';
     }
 
     function togglePassword() {

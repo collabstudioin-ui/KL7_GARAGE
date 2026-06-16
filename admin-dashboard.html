@@ -171,8 +171,8 @@
         </div>
         <div class="kpi-body">
           <span class="kpi-label">Bikes Listed</span>
-          <strong class="kpi-val">24</strong>
-          <span class="kpi-delta up">+3 this week</span>
+          <strong class="kpi-val" id="kpiBikes">0</strong>
+          <span class="kpi-delta up" id="kpiBikesDelta">Active</span>
         </div>
       </div>
       <div class="kpi-card">
@@ -181,8 +181,8 @@
         </div>
         <div class="kpi-body">
           <span class="kpi-label">Sell Requests</span>
-          <strong class="kpi-val">8</strong>
-          <span class="kpi-delta up">+2 new</span>
+          <strong class="kpi-val" id="kpiSell">0</strong>
+          <span class="kpi-delta up" id="kpiSellDelta">New</span>
         </div>
       </div>
       <div class="kpi-card">
@@ -191,8 +191,8 @@
         </div>
         <div class="kpi-body">
           <span class="kpi-label">Enquiries</span>
-          <strong class="kpi-val">15</strong>
-          <span class="kpi-delta warn">5 unread</span>
+          <strong class="kpi-val" id="kpiEnquiries">0</strong>
+          <span class="kpi-delta warn" id="kpiEnquiriesDelta">Unread</span>
         </div>
       </div>
     </div>
@@ -569,19 +569,19 @@
       <div class="panel">
         <div class="panel-head"><h2>Business Info</h2></div>
         <div class="settings-form">
-          <div class="sf-field"><label>Business Name</label><input type="text" value="KL7 Garage"/></div>
-          <div class="sf-field"><label>Phone Number</label><input type="text" value="+91 95671 38088"/></div>
-          <div class="sf-field"><label>Instagram Handle</label><input type="text" value="@k_l_7_garage"/></div>
-          <div class="sf-field"><label>Address</label><input type="text" placeholder="Enter your address"/></div>
-          <button class="btn-primary" style="margin-top:8px;">Save Changes</button>
+          <div class="sf-field"><label>Business Name</label><input type="text" id="s-bizname" value="KL7 Garage"/></div>
+          <div class="sf-field"><label>Phone Number</label><input type="text" id="s-bizphone" value="+91 95671 38088"/></div>
+          <div class="sf-field"><label>Instagram Handle</label><input type="text" id="s-bizinsta" value="@k_l_7_garage"/></div>
+          <div class="sf-field"><label>Address</label><input type="text" id="s-bizaddress" placeholder="Enter your address"/></div>
+          <button class="btn-primary" style="margin-top:8px;" onclick="saveSettings()">Save Changes</button>
         </div>
       </div>
       <div class="panel">
         <div class="panel-head"><h2>Admin Credentials</h2></div>
         <div class="settings-form">
-          <div class="sf-field"><label>Admin ID</label><input type="text" value="kl7admin"/></div>
-          <div class="sf-field"><label>New Password</label><input type="password" placeholder="Enter new password"/></div>
-          <div class="sf-field"><label>Confirm Password</label><input type="password" placeholder="Confirm new password"/></div>
+          <div class="sf-field"><label>Admin Email (ID)</label><input type="text" id="s-adminemail" value=""/></div>
+          <div class="sf-field"><label>New Password</label><input type="password" id="s-adminpass" placeholder="Enter new password"/></div>
+          <div class="sf-field"><label>Confirm Password</label><input type="password" id="s-adminpassconfirm" placeholder="Confirm new password"/></div>
           <div class="sf-field">
             <label>Dashboard Theme</label>
             <select id="themeSelect" onchange="setTheme(this.value)">
@@ -589,7 +589,7 @@
               <option value="dark">Dark Mode</option>
             </select>
           </div>
-          <button class="btn-primary" style="margin-top:8px;">Update Credentials</button>
+          <button class="btn-primary" style="margin-top:8px;" onclick="updateCredentials()">Update Credentials</button>
         </div>
       </div>
     </div>
@@ -649,6 +649,12 @@
             <option value="sold">Sold</option>
           </select>
         </div>
+        <div class="ff"><label>Segment</label>
+          <select id="f-luxury">
+            <option value="false" selected>Normal</option>
+            <option value="true">Luxury</option>
+          </select>
+        </div>
       </div>
       <div class="ff" style="margin-top:4px;"><label>Description</label><textarea id="f-desc" rows="3" placeholder="Describe the bike — service history, condition, highlights…"></textarea></div>
     </div>
@@ -673,11 +679,13 @@
     </div>
     <div class="modal-foot">
       <button class="btn-ghost" onclick="document.getElementById('sellModal').classList.remove('open')">Close</button>
-      <button class="btn-primary">Accept &amp; Contact</button>
+      <button class="btn-primary" id="btnAcceptSell" onclick="acceptSellRequest()">Accept &amp; Contact</button>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>

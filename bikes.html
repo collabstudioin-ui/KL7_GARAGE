@@ -63,78 +63,84 @@
       Filters
     </button>
     <div class="m-filter-scroll">
-      <button class="m-filter-chip">Brand</button>
-      <button class="m-filter-chip">Price</button>
-      <button class="m-filter-chip">Sort</button>
+      <button class="m-filter-chip" onclick="openSidebarAndScroll('brand-group')">Brand</button>
+      <button class="m-filter-chip" onclick="openSidebarAndScroll('price-group')">Price</button>
+      <button class="m-filter-chip" onclick="openSidebarAndScroll('sort-group')">Sort</button>
     </div>
   </div>
   <div class="bikes-layout">
 
     <!-- SIDEBAR FILTERS -->
     <aside class="sidebar">
-      <div class="filter-group">
+      <div class="filter-group" id="brand-group">
         <h4 class="filter-label">BRANDS</h4>
-        <label class="filter-check"><input type="checkbox"/> Honda</label>
-        <label class="filter-check"><input type="checkbox"/> Suzuki</label>
-        <label class="filter-check"><input type="checkbox"/> Yamaha</label>
-        <label class="filter-check"><input type="checkbox"/> KTM</label>
-        <label class="filter-check"><input type="checkbox"/> Royal Enfield</label>
-        <label class="filter-check"><input type="checkbox"/> Triumph</label>
-        <label class="filter-check"><input type="checkbox"/> Kawasaki</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Honda" onchange="applyFilters()"/> Honda</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Suzuki" onchange="applyFilters()"/> Suzuki</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Yamaha" onchange="applyFilters()"/> Yamaha</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="KTM" onchange="applyFilters()"/> KTM</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Royal Enfield" onchange="applyFilters()"/> Royal Enfield</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Triumph" onchange="applyFilters()"/> Triumph</label>
+        <label class="filter-check"><input type="checkbox" name="brand-filter" value="Kawasaki" onchange="applyFilters()"/> Kawasaki</label>
       </div>
 
-      <div class="filter-group">
-        <h4 class="filter-label">PRICE RANGE</h4>
-        <input type="range" class="filter-range" min="0" max="2000000" value="1000000"/>
+      <div class="filter-group" id="price-group">
+        <h4 class="filter-label" id="priceLabel">PRICE RANGE</h4>
+        <input type="range" class="filter-range" id="priceRange" min="0" max="2000000" value="2000000" oninput="updatePriceLabel(this.value); applyFilters()"/>
         <div class="range-vals"><span>₹0</span><span>₹20,00,000</span></div>
       </div>
 
-      <div class="filter-group">
-        <h4 class="filter-label">YEAR RANGE</h4>
-        <input type="range" class="filter-range" min="2010" max="2025" value="2020"/>
+      <div class="filter-group" id="year-group">
+        <h4 class="filter-label" id="yearLabel">YEAR RANGE</h4>
+        <input type="range" class="filter-range" id="yearRange" min="2010" max="2025" value="2025" oninput="updateYearLabel(this.value); applyFilters()"/>
         <div class="range-vals"><span>2010</span><span>2025</span></div>
       </div>
 
       <div class="filter-group">
         <h4 class="filter-label">BODY TYPE</h4>
-        <label class="filter-check"><input type="checkbox"/> Cruiser</label>
-        <label class="filter-check"><input type="checkbox"/> Sports</label>
-        <label class="filter-check"><input type="checkbox"/> Adventure</label>
-        <label class="filter-check"><input type="checkbox"/> Naked</label>
-        <label class="filter-check"><input type="checkbox"/> Scooter</label>
+        <label class="filter-check"><input type="checkbox" name="body-filter" value="Cruiser" onchange="applyFilters()"/> Cruiser</label>
+        <label class="filter-check"><input type="checkbox" name="body-filter" value="Sports" onchange="applyFilters()"/> Sports</label>
+        <label class="filter-check"><input type="checkbox" name="body-filter" value="Adventure" onchange="applyFilters()"/> Adventure</label>
+        <label class="filter-check"><input type="checkbox" name="body-filter" value="Naked" onchange="applyFilters()"/> Naked</label>
+        <label class="filter-check"><input type="checkbox" name="body-filter" value="Scooter" onchange="applyFilters()"/> Scooter</label>
       </div>
 
       <div class="filter-group">
         <h4 class="filter-label">COLOR</h4>
-        <label class="filter-check"><input type="checkbox"/> Black</label>
-        <label class="filter-check"><input type="checkbox"/> White</label>
-        <label class="filter-check"><input type="checkbox"/> Red</label>
-        <label class="filter-check"><input type="checkbox"/> Blue</label>
-        <label class="filter-check"><input type="checkbox"/> Orange</label>
+        <label class="filter-check"><input type="checkbox" name="color-filter" value="Black" onchange="applyFilters()"/> Black</label>
+        <label class="filter-check"><input type="checkbox" name="color-filter" value="White" onchange="applyFilters()"/> White</label>
+        <label class="filter-check"><input type="checkbox" name="color-filter" value="Red" onchange="applyFilters()"/> Red</label>
+        <label class="filter-check"><input type="checkbox" name="color-filter" value="Blue" onchange="applyFilters()"/> Blue</label>
+        <label class="filter-check"><input type="checkbox" name="color-filter" value="Orange" onchange="applyFilters()"/> Orange</label>
       </div>
 
       <div class="filter-group">
-        <h4 class="filter-label">KILOMETER DRIVEN</h4>
-        <input type="range" class="filter-range" min="0" max="100000" value="50000"/>
+        <h4 class="filter-label" id="kmLabel">KILOMETER DRIVEN</h4>
+        <input type="range" class="filter-range" id="kmRange" min="0" max="100000" value="100000" oninput="updateKmLabel(this.value); applyFilters()"/>
         <div class="range-vals"><span>0 km</span><span>1,00,000 km</span></div>
       </div>
 
-      <button class="btn-apply">APPLY FILTERS</button>
-      <button class="btn-reset">RESET</button>
+      <div class="filter-group" id="segment-group">
+        <h4 class="filter-label">SEGMENT</h4>
+        <label class="filter-check"><input type="checkbox" name="segment-filter" value="luxury" onchange="applyFilters()"/> Luxury</label>
+        <label class="filter-check"><input type="checkbox" name="segment-filter" value="normal" onchange="applyFilters()"/> Normal</label>
+      </div>
+
+      <button class="btn-apply" onclick="applyFilters(); document.querySelector('.sidebar').classList.remove('open')">APPLY FILTERS</button>
+      <button class="btn-reset" onclick="resetFilters()">RESET</button>
     </aside>
 
     <!-- BIKES GRID AREA -->
     <div class="bikes-main">
       <div class="bikes-top-bar">
-        <span class="bikes-count">89 Bikes Found</span>
-        <div class="bikes-actions">
+        <span class="bikes-count">0 Bikes Found</span>
+        <div class="bikes-actions" id="sort-group">
           <div class="search-box">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="bikeSearchInput" placeholder="Search bikes..." oninput="filterBikes()"/>
+            <input type="text" id="bikeSearchInput" placeholder="Search bikes..." oninput="applyFilters()"/>
           </div>
           <div class="sort-wrap">
             <label>Sort by:</label>
-            <select class="sort-select">
+            <select class="sort-select" id="sortSelect" onchange="applyFilters()">
               <option>Relevance</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -145,142 +151,7 @@
       </div>
 
       <div class="bikes-grid">
-
-        <!-- Card 1 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Royal Enfield Shotgun 650"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Royal Enfield Shotgun 650</h3>
-              <p class="bike-meta"><span>2023</span> &bull; <span>4,200 km</span> &bull; <span>Black</span></p>
-              <p class="bike-price">&#8377;4,13,042</p>
-            </div>
-          </div>
-          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=400&q=80" alt="Triumph Bobber"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Triumph Racer Bobber</h3>
-              <p class="bike-meta"><span>2022</span> &bull; <span>8,100 km</span> &bull; <span>Matte Black</span></p>
-              <p class="bike-price">&#8377;12,87,500</p>
-            </div>
-          </div>
-          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&q=80" alt="KTM Duke 125"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>KTM DUKE 125</h3>
-              <p class="bike-meta"><span>2023</span> &bull; <span>3,500 km</span> &bull; <span>Orange</span></p>
-              <p class="bike-price">&#8377;1,66,218</p>
-            </div>
-          </div>
-          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=400&q=80" alt="Royal Enfield Classic 350"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Royal Enfield Classic 350</h3>
-              <p class="bike-meta"><span>2022</span> &bull; <span>12,000 km</span> &bull; <span>Chrome Red</span></p>
-              <p class="bike-price">&#8377;1,89,000</p>
-            </div>
-          </div>
-          <a href="bike-details.html" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=400&q=80" alt="Yamaha MT-15"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Yamaha MT-15 V2</h3>
-              <p class="bike-meta"><span>2023</span> &bull; <span>5,600 km</span> &bull; <span>Ice Fluo</span></p>
-              <p class="bike-price">&#8377;1,58,000</p>
-            </div>
-          </div>
-          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1635073908681-b791b4a22c32?w=400&q=80" alt="Honda CB Hornet"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Honda CB Hornet 200R</h3>
-              <p class="bike-meta"><span>2021</span> &bull; <span>18,300 km</span> &bull; <span>Blue</span></p>
-              <p class="bike-price">&#8377;1,12,000</p>
-            </div>
-          </div>
-          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 7 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&q=80" alt="Bajaj Dominar 400"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Bajaj Dominar 400</h3>
-              <p class="bike-meta"><span>2022</span> &bull; <span>22,000 km</span> &bull; <span>Auroral Green</span></p>
-              <p class="bike-price">&#8377;1,74,000</p>
-            </div>
-          </div>
-          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 8 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1571805423144-2e0e7f8e5a63?w=400&q=80" alt="Suzuki Gixxer SF"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>Suzuki Gixxer SF 250</h3>
-              <p class="bike-meta"><span>2021</span> &bull; <span>14,900 km</span> &bull; <span>Glass Sparkle Black</span></p>
-              <p class="bike-price">&#8377;1,45,000</p>
-            </div>
-          </div>
-          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
-        <!-- Card 9 -->
-        <div class="bike-card-wrap">
-          <div class="bike-card">
-            <div class="bike-card-img">
-              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&q=80" alt="KTM Duke 390"/>
-            </div>
-            <div class="bike-card-info">
-              <h3>KTM DUKE 390</h3>
-              <p class="bike-meta"><span>2022</span> &bull; <span>9,800 km</span> &bull; <span>White</span></p>
-              <p class="bike-price">&#8377;2,85,000</p>
-            </div>
-          </div>
-          <a href="#" class="btn-view">VIEW DETAILS &#10230;</a>
-        </div>
-
+        <!-- populated dynamically by JS -->
       </div>
 
       <!-- PAGINATION -->
@@ -352,25 +223,9 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
   <script>
-    function toggleMobileNav() {
-      document.getElementById('hamburger').classList.toggle('open');
-      document.getElementById('mobileDrawer').classList.toggle('open');
-      document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
-    }
-
-    function filterBikes() {
-      const query = document.getElementById('bikeSearchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.bike-card-wrap');
-      let visibleCount = 0;
-      cards.forEach(card => {
-        const title = card.querySelector('.bike-card-info h3').textContent.toLowerCase();
-        if (title.includes(query)) { card.style.display = ''; visibleCount++; }
-        else { card.style.display = 'none'; }
-      });
-      document.querySelector('.bikes-count').textContent = visibleCount + (visibleCount === 1 ? ' Bike Found' : ' Bikes Found');
-    }
-
     function toggleMobileNav() {
       const hamburger = document.getElementById('hamburger');
       const drawer = document.getElementById('mobileDrawer');
@@ -381,6 +236,165 @@
       overlay.classList.toggle('open', !isOpen);
       document.body.style.overflow = !isOpen ? 'hidden' : '';
     }
+
+    function openSidebarAndScroll(groupId) {
+      document.querySelector('.sidebar').classList.add('open');
+      const el = document.getElementById(groupId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function updatePriceLabel(val) {
+      document.getElementById('priceLabel').textContent = `PRICE RANGE (Max: ₹${Number(val).toLocaleString('en-IN')})`;
+    }
+
+    function updateYearLabel(val) {
+      document.getElementById('yearLabel').textContent = `YEAR RANGE (Max: ${val})`;
+    }
+
+    function updateKmLabel(val) {
+      document.getElementById('kmLabel').textContent = `KILOMETER DRIVEN (Max: ${Number(val).toLocaleString()} km)`;
+    }
+
+    let ALL_BIKES = [];
+    const PAGE_SIZE = 9;
+    let currentPage = 1;
+    let filteredList = [];
+
+    async function loadBikes() {
+      const { data, error } = await supabase
+        .from('bikes')
+        .select('*, bike_photos(image_url, sort_order)')
+        .order('created_at', { ascending: false });
+      if (error) {
+        console.error(error);
+        return;
+      }
+      ALL_BIKES = data;
+      resetFilters();
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('bikeSearchInput').value.toLowerCase();
+      const brands = [...document.querySelectorAll('input[name="brand-filter"]:checked')].map(c => c.value);
+      const bodyTypes = [...document.querySelectorAll('input[name="body-filter"]:checked')].map(c => c.value);
+      const colors = [...document.querySelectorAll('input[name="color-filter"]:checked')].map(c => c.value);
+      const segments = [...document.querySelectorAll('input[name="segment-filter"]:checked')].map(c => c.value);
+      const maxPrice = Number(document.getElementById('priceRange').value);
+      const maxYearVal = Number(document.getElementById('yearRange').value);
+      const maxKm = Number(document.getElementById('kmRange').value);
+      const sort = document.getElementById('sortSelect').value;
+
+      filteredList = ALL_BIKES.filter(b =>
+        b.status === 'active' &&
+        b.name.toLowerCase().includes(query) &&
+        (brands.length === 0 || brands.includes(b.brand)) &&
+        (bodyTypes.length === 0 || bodyTypes.includes(b.body_type)) &&
+        (colors.length === 0 || colors.includes(b.color)) &&
+        (segments.length === 0 || segments.includes(b.is_luxury ? 'luxury' : 'normal')) &&
+        b.price <= maxPrice &&
+        b.year <= maxYearVal &&
+        b.km_driven <= maxKm
+      );
+
+      if (sort === 'Price: Low to High') filteredList.sort((a, b) => a.price - b.price);
+      else if (sort === 'Price: High to Low') filteredList.sort((a, b) => b.price - a.price);
+      else if (sort === 'Newest First') filteredList.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      currentPage = 1;
+      renderBikes();
+    }
+
+    function resetFilters() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+      document.getElementById('bikeSearchInput').value = '';
+      
+      const priceRange = document.getElementById('priceRange');
+      priceRange.value = priceRange.max;
+      updatePriceLabel(priceRange.max);
+
+      const yearRange = document.getElementById('yearRange');
+      yearRange.value = yearRange.max;
+      updateYearLabel(yearRange.max);
+
+      const kmRange = document.getElementById('kmRange');
+      kmRange.value = kmRange.max;
+      updateKmLabel(kmRange.max);
+
+      document.getElementById('sortSelect').value = 'Relevance';
+      applyFilters();
+    }
+
+    function renderBikes() {
+      const list = filteredList;
+      document.querySelector('.bikes-count').textContent =
+        `${list.length} Bike${list.length === 1 ? '' : 's'} Found`;
+
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const pageItems = list.slice(start, start + PAGE_SIZE);
+
+      const grid = document.querySelector('.bikes-grid');
+      if (pageItems.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">No active bikes match your filter.</div>';
+        renderPagination(0);
+        return;
+      }
+
+      grid.innerHTML = pageItems.map(b => {
+        const cover = b.cover_image || (b.bike_photos?.[0]?.image_url) || 'assets/placeholder.png';
+        const luxuryTag = b.is_luxury ? `<span class="luxury-tag">LUXURY</span>` : '';
+        const luxuryClass = b.is_luxury ? ' luxury' : '';
+        
+        // Formatted km and price
+        const formattedKm = Number(b.km_driven).toLocaleString('en-IN') + ' km';
+        const formattedPrice = b.price.toLocaleString('en-IN');
+        
+        return `
+          <div class="bike-card-wrap">
+            <div class="bike-card${luxuryClass}">
+              <div class="bike-card-img">
+                ${luxuryTag}
+                <img src="${cover}" alt="${b.name}"/>
+              </div>
+              <div class="bike-card-info">
+                <h3>${b.name}</h3>
+                <p class="bike-meta">
+                  <span>${b.year}</span> &bull; 
+                  <span>${formattedKm}</span> &bull; 
+                  <span>${b.color || ''}</span>
+                </p>
+                <p class="bike-price">&#8377;${formattedPrice}</p>
+              </div>
+            </div>
+            <a href="bike-details.html?id=${b.id}" class="btn-view">VIEW DETAILS &#10230;</a>
+          </div>`;
+      }).join('');
+
+      renderPagination(list.length);
+    }
+
+    function renderPagination(totalItems) {
+      const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+      const wrap = document.querySelector('.pagination');
+      if (!wrap) return;
+      if (totalItems <= PAGE_SIZE) {
+        wrap.innerHTML = '';
+        return;
+      }
+      wrap.innerHTML = Array.from({length: totalPages}, (_, i) => `
+        <button class="page-btn${i+1 === currentPage ? ' active' : ''}" onclick="goToPage(${i+1})">${i+1}</button>
+      `).join('');
+    }
+
+    function goToPage(n) {
+      currentPage = n;
+      renderBikes();
+      // Scroll grid into view
+      document.querySelector('.bikes-top-bar').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBikes);
   </script>
 </body>
 </html>

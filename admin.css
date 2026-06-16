@@ -1044,3 +1044,5 @@ input, select, textarea { font-family: var(--font); }
   .form-grid { grid-template-columns: 1fr; }
   .quick-actions { grid-template-columns: 1fr; }
 }
+
+.badge.luxury { background: #1a1a1a; color: #d4af37; border: 1px solid #d4af37; }
