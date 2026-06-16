@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=1280">
+  <title>Bike Details — NLT Garage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bike-details.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" height="52"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li class="nav-active"><a href="bikes.html">BIKES</a></li>
+      <li><a href="sell.html">SELL YOUR BIKE</a></li>
+      <li><a href="gallery.html">GALLERY</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="index.html#contact-section">CONTACT US</a></li>
+    </ul>
+    <div class="nav-admin">
+      <a href="admin-login.html" title="Admin Login">
+        Admin
+      </a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="nav-mobile-drawer" id="mobileDrawer">
+    <button class="nav-mobile-close" onclick="toggleMobileNav()">&#10005;</button>
+    <a href="index.html">HOME</a>
+    <a href="bikes.html">BIKES</a>
+    <a href="sell.html">SELL YOUR BIKE</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="#">ABOUT</a>
+    <a href="index.html#contact-section">CONTACT US</a>
+  </div>
+
+  <!-- BIKE DETAILS MAIN -->
+  <div class="bike-details-container">
+    <div class="breadcrumb" style="display: flex; align-items: center; gap: 16px;">
+      <a href="javascript:history.back()" class="btn-back" style="font-size: 14px; text-decoration: none; color: #666; display: flex; align-items: center; gap: 4px; padding-right: 16px; border-right: 1px solid #ccc;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg> Back
+      </a>
+      <span><a href="bikes.html">Bikes</a> &gt; <span style="color: #000; font-weight: 600;">Royal Enfield Shotgun 650</span></span>
+    </div>
+
+    <div class="details-split">
+      <div class="details-gallery">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Royal Enfield Shotgun 650" class="main-img">
+        <div class="thumb-row">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=80" alt="Thumb" class="active">
+          <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200&q=80" alt="Thumb">
+          <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=200&q=80" alt="Thumb">
+        </div>
+      </div>
+      <div class="details-info">
+        <h1>Royal Enfield Shotgun 650</h1>
+        <p class="price">&#8377;4,13,042</p>
+        
+        <div class="key-specs">
+          <div class="spec-item">
+            <span>Year</span>
+            <strong>2023</strong>
+          </div>
+          <div class="spec-item">
+            <span>Kilometers</span>
+            <strong>4,200 km</strong>
+          </div>
+          <div class="spec-item">
+            <span>Color</span>
+            <strong>Black</strong>
+          </div>
+          <div class="spec-item">
+            <span>Ownership</span>
+            <strong>1st Owner</strong>
+          </div>
+        </div>
+
+        <div class="description">
+          <h3>Overview</h3>
+          <p>This Royal Enfield Shotgun 650 is in pristine condition. Regularly serviced at authorized service centers with complete records available. Perfect for both city commutes and long highway rides.</p>
+        </div>
+
+        <button class="btn-buy">📞 CONTACT TO BUY NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="assets/kl7garagaelogo.png" alt="KL7 Garage" />
+        <p>Your premium destination for pre-owned luxury motorcycles. We buy, sell, and trade.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>QUICK LINKS</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="bikes.html">Bikes</a></li>
+            <li><a href="sell.html">Sell Your Bike</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="index.html#contact-section">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>SUPPORT</h4>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CONTACT</h4>
+          <ul>
+            <li><a href="tel:+919567138088">+91 95671 38088</a></li>
+            <li><a href="#">@k_l_7_garage</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&#169; 2026 KL7 Garage. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/k_l_7_garage" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    function toggleMobileNav() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('mobileDrawer').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
+    }
+
+    async function loadBikeDetails() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) {
+        document.querySelector('.bike-details-container').innerHTML = '<div style="text-align: center; padding: 80px 20px; color: #888;">No bike ID provided in URL. <a href="bikes.html" style="color: #000; text-decoration: underline;">Browse Bikes</a></div>';
+        return;
+      }
+
+      const { data: bike, error } = await supabase.from('bikes').select('*').eq('id', id).single();
+      if (error || !bike) {
+        document.querySelector('.bike-details-container').innerHTML = '<div style="text-align: center; padding: 80px 20px; color: #888;">Bike not found or has been sold. <a href="bikes.html" style="color: #000; text-decoration: underline;">Browse Bikes</a></div>';
+        return;
+      }
+
+      const { data: photos } = await supabase
+        .from('bike_photos')
+        .select('*')
+        .eq('bike_id', id)
+        .order('sort_order', { ascending: true });
+
+      // Update breadcrumb and title
+      const breadcrumbSpan = document.querySelector('.breadcrumb span');
+      if (breadcrumbSpan) {
+        breadcrumbSpan.innerHTML = `<a href="bikes.html">Bikes</a> &gt; <span style="color: #000; font-weight: 600;">${bike.name}</span>`;
+      }
+
+      document.querySelector('.details-info h1').textContent = bike.name;
+      document.querySelector('.details-info .price').innerHTML = `&#8377;${bike.price.toLocaleString('en-IN')}`;
+      
+      const specItems = document.querySelectorAll('.spec-item strong');
+      if (specItems.length >= 4) {
+        specItems[0].textContent = bike.year;
+        specItems[1].textContent = `${Number(bike.km_driven).toLocaleString('en-IN')} km`;
+        specItems[2].textContent = bike.color || '—';
+        specItems[3].textContent = bike.ownership || '1st Owner';
+      }
+
+      document.querySelector('.description p').textContent = bike.description || 'No description available.';
+
+      // Gallery update
+      const imgs = (photos && photos.length > 0) ? photos.map(p => p.image_url) : [bike.cover_image || 'assets/placeholder.png'];
+      const mainImg = document.querySelector('.main-img');
+      if (mainImg) {
+        mainImg.src = imgs[0];
+        mainImg.alt = bike.name;
+      }
+
+      const thumbRow = document.querySelector('.thumb-row');
+      if (thumbRow) {
+        thumbRow.innerHTML = imgs.map((src, i) =>
+          `<img src="${src}" alt="Thumb" class="${i === 0 ? 'active' : ''}">`
+        ).join('');
+
+        // Thumbnail switcher
+        document.querySelectorAll('.thumb-row img').forEach(img => {
+          img.addEventListener('click', () => {
+            if (mainImg) mainImg.src = img.src;
+            document.querySelectorAll('.thumb-row img').forEach(t => t.classList.remove('active'));
+            img.classList.add('active');
+          });
+        });
+      }
+
+      // Luxury tag
+      if (bike.is_luxury) {
+        const tag = document.createElement('span');
+        tag.className = 'luxury-tag';
+        tag.textContent = 'LUXURY';
+        const gallery = document.querySelector('.details-gallery');
+        if (gallery) {
+          gallery.style.position = 'relative';
+          gallery.prepend(tag);
+        }
+      }
+
+      // Buy Button Listener
+      const buyBtn = document.querySelector('.btn-buy');
+      if (buyBtn) {
+        buyBtn.onclick = async () => {
+          const fullName = prompt("Enter your Full Name to inquire about this bike:");
+          if (!fullName) return;
+          const phone = prompt("Enter your Phone Number:");
+          if (!phone) return;
+          const email = prompt("Enter your Email Address (Optional):") || '';
+          const message = prompt("Enter your message:", `Hi, I am interested in buying the ${bike.name}. Please contact me.`);
+          if (!message) return;
+
+          const { error: enqError } = await supabase.from('enquiries').insert({
+            bike_id: bike.id,
+            full_name: fullName,
+            email: email,
+            phone: phone,
+            message: message
+          });
+
+          if (enqError) {
+            console.error(enqError);
+            alert('Something went wrong. Please try again.');
+            return;
+          }
+
+          alert('Enquiry submitted successfully! Our team will contact you soon.');
+        };
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBikeDetails);
+  </script>
+</body>
+</html>
